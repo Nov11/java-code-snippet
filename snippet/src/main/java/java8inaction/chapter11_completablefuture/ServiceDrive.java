@@ -71,8 +71,45 @@ public class ServiceDrive {
         }
     }
 
+    public static void timedExecution3() {
+        List<Shop> list = new ArrayList<>();
+        list.add(new Shop("1"));
+        list.add(new Shop("2"));
+        list.add(new Shop("3"));
+        list.add(new Shop("4"));
+        list.add(new Shop("5"));
+        list.add(new Shop("6"));
+        list.add(new Shop("7"));
+        list.add(new Shop("8"));
+        list.add(new Shop("9"));
+        PriceService priceService = new PriceService(list);
+
+        String productName = "iphone2048s";
+        System.out.println("single stream");
+        {
+            long start = System.currentTimeMillis();
+            List<String> result = priceService.findPricesWithDiscountSingleStream(productName);
+            long finished = System.currentTimeMillis();
+            System.out.println("[future get] takes : " + (finished - start));
+        }
+        System.out.println("parallel stream");
+        {
+            long start = System.currentTimeMillis();
+            List<String> result = priceService.findPricesWithDiscountParallelStream(productName);
+            long finished = System.currentTimeMillis();
+            System.out.println("[future get] takes : " + (finished - start));
+        }
+        System.out.println("future");
+        {
+            long start = System.currentTimeMillis();
+            List<String> result = priceService.findPricesWithDiscountFuture(productName);
+            long finished = System.currentTimeMillis();
+            System.out.println("[future get] takes : " + (finished - start));
+        }
+    }
     public static void main(String[] args) {
 //        timedExecution();
-        timedExecution2();
+//        timedExecution2();
+        timedExecution3();
     }
 }

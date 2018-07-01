@@ -14,7 +14,7 @@ public class PriceService {
     private List<Shop> shops;
     private Executor executor;
 
-    public PriceService(List<Shop> shops) {
+    PriceService(List<Shop> shops) {
         this.shops = shops;
         executor = Executors.newFixedThreadPool(Math.min(shops.size(), 800),
                 new ThreadFactory() {
@@ -27,8 +27,32 @@ public class PriceService {
                 });
     }
 
-    public List<String> findPrices(String productName) {
-        return singleStream(productName);
+    //11.4
+    public List<String> findPricesWithDiscountSingleStream(String productName) {
+        return shops.stream()
+                .map(s -> s.getPriceString(productName))
+                .map(Quote::parse)
+                .map(Discount::applyDiscount)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> findPricesWithDiscountParallelStream(String productName) {
+        return shops.parallelStream()
+                .map(s -> s.getPriceString(productName))
+                .map(Quote::parse)
+                .map(Discount::applyDiscount)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> findPricesWithDiscountFuture(String productName) {
+        List<CompletableFuture<String>> list =
+                shops.stream().map(s -> CompletableFuture.supplyAsync(() -> s.getPriceString(productName), executor))
+                        .map(future -> future.thenApply(Quote::parse))
+                        .map(future -> future.thenCompose((quote) ->
+                                CompletableFuture.supplyAsync(() -> Discount.applyDiscount(quote), executor)
+                        ))
+                        .collect(Collectors.toList());
+        return list.stream().map(CompletableFuture::join).collect(Collectors.toList());
     }
 
     public List<String> singleStream(String productName) {
