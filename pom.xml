@@ -13,6 +13,7 @@
         <!--<module>yihaomen</module>-->
         <!--<module>offical-help</module>-->
         <module>snippet</module>
+        <module>kryowiththriftandprotobuf</module>
     </modules>
 
     <build>
