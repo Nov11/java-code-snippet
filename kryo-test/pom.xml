@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kryo-with-thrift-and-protobuf</artifactId>
+    <artifactId>kryo-test</artifactId>
 
     <dependencies>
         <dependency>
