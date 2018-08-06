@@ -1,4 +1,4 @@
-package java8inaction.chapter11_completablefuture;
+package chapter11_completablefuture;
 
 /**
  * Created by c6s on 18-7-1

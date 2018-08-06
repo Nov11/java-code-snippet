@@ -1,6 +1,6 @@
-package java8inaction.chapter11_completablefuture;
+package chapter11_completablefuture;
 
-import static java8inaction.chapter11_completablefuture.Util.delay;
+import static chapter11_completablefuture.Util.delay;
 
 /**
  * Created by c6s on 18-7-1

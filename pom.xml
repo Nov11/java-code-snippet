@@ -14,6 +14,7 @@
         <!--<module>offical-help</module>-->
         <module>snippet</module>
         <module>kryo-test</module>
+        <module>java8inaction</module>
     </modules>
 
     <build>

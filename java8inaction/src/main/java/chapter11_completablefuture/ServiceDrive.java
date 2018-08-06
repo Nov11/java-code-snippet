@@ -1,4 +1,4 @@
-package java8inaction.chapter11_completablefuture;
+package chapter11_completablefuture;
 
 import java.util.ArrayList;
 import java.util.List;
