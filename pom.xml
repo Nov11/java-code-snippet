@@ -17,6 +17,7 @@
         <module>java8inaction</module>
         <module>loggers</module>
         <module>cross-ref</module>
+        <module>netty-ref</module>
     </modules>
 
     <build>
@@ -83,6 +84,13 @@
                 <version>4.3.19.RELEASE</version>
                 <scope>test</scope>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>5.0.0.Alpha1</version>
+            </dependency>
+
 
         </dependencies>
         <!--<dependency>-->
