@@ -19,6 +19,7 @@
         <module>cross-ref</module>
         <module>netty-ref</module>
         <module>lettuce-test</module>
+        <module>jedis_ex</module>
     </modules>
 
     <build>
