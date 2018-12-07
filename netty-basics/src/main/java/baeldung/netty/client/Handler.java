@@ -20,5 +20,6 @@ public class Handler extends ChannelInboundHandlerAdapter {
         request.setIntValue(11);
         request.setStringValue("s11");
         ctx.writeAndFlush(request);
+        logger.info("channel active: send msg");
     }
 }
