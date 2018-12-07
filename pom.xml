@@ -20,6 +20,7 @@
         <module>netty-ref</module>
         <module>lettuce-test</module>
         <module>jedis_ex</module>
+        <module>netty-basics</module>
     </modules>
 
     <build>
@@ -86,12 +87,7 @@
                 <version>4.3.19.RELEASE</version>
                 <scope>test</scope>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-all</artifactId>
-                <version>5.0.0.Alpha1</version>
-            </dependency>
+
 
 
             <dependency>
