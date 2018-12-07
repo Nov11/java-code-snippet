@@ -21,6 +21,7 @@
         <module>lettuce-test</module>
         <module>jedis_ex</module>
         <module>netty-basics</module>
+        <module>jedis-related</module>
     </modules>
 
     <build>
