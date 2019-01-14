@@ -16,6 +16,7 @@
         <module>kryo-test</module>
         <module>java8inaction</module>
         <module>loggers</module>
+        <module>intro-to-thrift</module>
     </modules>
 
     <build>
