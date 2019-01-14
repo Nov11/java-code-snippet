@@ -16,6 +16,12 @@
         <module>kryo-test</module>
         <module>java8inaction</module>
         <module>loggers</module>
+        <module>cross-ref</module>
+        <module>netty-ref</module>
+        <module>lettuce-test</module>
+        <module>jedis_ex</module>
+        <module>netty-basics</module>
+        <module>jedis-related</module>
         <module>intro-to-thrift</module>
     </modules>
 
@@ -53,12 +59,6 @@
                 <version>4.12</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.11</version>
-                <scope>test</scope>
-            </dependency>
             <!--log4j-->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
@@ -75,6 +75,29 @@
                 <artifactId>log4j-slf4j-impl</artifactId>
                 <version>2.7</version>
             </dependency>
+            <!--spring-->
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>4.3.19.RELEASE</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>4.3.19.RELEASE</version>
+                <scope>test</scope>
+            </dependency>
+
+
+
+            <dependency>
+                <groupId>io.lettuce</groupId>
+                <artifactId>lettuce-core</artifactId>
+                <version>5.0.1.RELEASE</version>
+            </dependency>
+
         </dependencies>
         <!--<dependency>-->
         <!--<groupId>org.mybatis</groupId>-->
