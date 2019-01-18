@@ -23,6 +23,7 @@
         <module>netty-basics</module>
         <module>jedis-related</module>
         <module>intro-to-thrift</module>
+        <module>aspectj</module>
     </modules>
 
     <build>
