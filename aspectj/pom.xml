@@ -31,10 +31,20 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.thrift</groupId>
+            <artifactId>libthrift</artifactId>
+            <version>0.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>nov11</groupId>
+            <artifactId>thrift</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
@@ -47,7 +57,13 @@
                     <verbose>true</verbose>
                     <Xlint>ignore</Xlint>
                     <encoding>UTF-8</encoding>
-                    <aspectDirectory>src/main/java</aspectDirectory>
+                    <!--<aspectDirectory>src/main/java</aspectDirectory>-->
+                    <!--<weaveDependencies>-->
+                        <!--<weaveDependency>-->
+                            <!--<groupId>nov11</groupId>-->
+                            <!--<artifactId>thrift</artifactId>-->
+                        <!--</weaveDependency>-->
+                    <!--</weaveDependencies>-->
                 </configuration>
                 <executions>
                     <execution>
