@@ -15,17 +15,17 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
-            <version>1.8.13</version>
+            <version>1.8.9</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.8.13</version>
+            <version>1.8.9</version>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjtools</artifactId>
-            <version>1.8.13</version>
+            <version>1.8.9</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -48,7 +48,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.7</version>
+                <version>1.10</version>
                 <configuration>
                     <complianceLevel>1.8</complianceLevel>
                     <source>1.8</source>
@@ -58,12 +58,12 @@
                     <Xlint>ignore</Xlint>
                     <encoding>UTF-8</encoding>
                     <!--<aspectDirectory>src/main/java</aspectDirectory>-->
-                    <!--<weaveDependencies>-->
-                        <!--<weaveDependency>-->
-                            <!--<groupId>nov11</groupId>-->
-                            <!--<artifactId>thrift</artifactId>-->
-                        <!--</weaveDependency>-->
-                    <!--</weaveDependencies>-->
+                    <weaveDependencies>
+                        <weaveDependency>
+                            <groupId>nov11</groupId>
+                            <artifactId>thrift</artifactId>
+                        </weaveDependency>
+                    </weaveDependencies>
                 </configuration>
                 <executions>
                     <execution>
@@ -76,15 +76,15 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-compiler-plugin</artifactId>-->
+                <!--<version>3.5.1</version>-->
+                <!--<configuration>-->
+                    <!--<source>1.8</source>-->
+                    <!--<target>1.8</target>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <!--<plugin>-->
             <!--<groupId>org.codehaus.mojo</groupId>-->
             <!--<artifactId>aspectj-maven-plugin</artifactId>-->
