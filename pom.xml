@@ -25,6 +25,7 @@
         <module>intro-to-thrift</module>
         <module>aspectj</module>
         <module>thrift</module>
+        <module>common</module>
     </modules>
 
     <build>
