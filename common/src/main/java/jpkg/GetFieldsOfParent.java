@@ -1,6 +1,7 @@
 package jpkg;
 
 import com.sun.xml.internal.ws.spi.db.FieldSetter;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TMultiplexedProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -37,6 +38,12 @@ public class GetFieldsOfParent {
 
 
         System.out.println(getMemoryBuffer(tMultiplexedProtocol) == buffer);
+
+
+        TMemoryBuffer tt = (TMemoryBuffer)
+        FieldUtils.readField(tMultiplexedProtocol, "trans_", true);
+
+        System.out.println(tt == buffer);
     }
 
     private static TMemoryBuffer getMemoryBuffer(TMultiplexedProtocol tMultiplexedProtocol) throws NoSuchFieldException, IllegalAccessException {
