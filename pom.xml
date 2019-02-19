@@ -26,6 +26,7 @@
         <module>aspectj</module>
         <module>thrift</module>
         <module>common</module>
+        <module>plat-with-jython</module>
     </modules>
 
     <build>
