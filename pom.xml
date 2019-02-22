@@ -27,6 +27,7 @@
         <module>thrift</module>
         <module>common</module>
         <module>plat-with-jython</module>
+        <module>play-with-spring</module>
     </modules>
 
     <build>
