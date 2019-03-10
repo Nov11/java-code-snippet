@@ -9,21 +9,23 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>nov11</groupId>
-    <artifactId>intro-to-thrift</artifactId>
+    <artifactId>play-with-spring</artifactId>
+
+    <properties>
+        <org.springframework.version>4.2.5.RELEASE</org.springframework.version>
+    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.thrift</groupId>
-            <artifactId>libthrift</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
