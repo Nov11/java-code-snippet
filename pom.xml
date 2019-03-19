@@ -17,7 +17,6 @@
         <module>java8inaction</module>
         <module>loggers</module>
         <module>cross-ref</module>
-        <module>netty-ref</module>
         <module>lettuce-test</module>
         <module>jedis_ex</module>
         <module>netty-basics</module>
@@ -69,6 +68,28 @@
                 <groupId>com.esotericsoftware</groupId>
                 <artifactId>kryo</artifactId>
                 <version>4.0.1</version>
+            </dependency>
+            <!-- 1. exclude commons-logging -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!--<!- 2. Bridge logging from JCL to SLF4j&ndash;&gt;-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>1.7.25</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>1.2.3</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/junit/junit -->
             <dependency>
