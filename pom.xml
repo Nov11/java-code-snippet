@@ -26,6 +26,7 @@
         <module>thrift</module>
         <module>common</module>
         <module>embedded-jetty</module>
+        <module>mongodb</module>
     </modules>
 
     <build>
