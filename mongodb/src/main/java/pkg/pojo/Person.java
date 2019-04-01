@@ -1,11 +1,10 @@
 package pkg.pojo;
 
-import org.bson.types.ObjectId;
-
 import java.util.Date;
 
 public class Person {
-    private ObjectId id;
+//    private ObjectId id;
+    private String id;
     private String name;
     private int age;
     private Address address;
@@ -20,11 +19,20 @@ public class Person {
         this.address = address;
     }
 
-    public ObjectId getId() {
+//    public ObjectId getId() {
+//        return id;
+//    }
+//
+//    public void setId(final ObjectId id) {
+//        this.id = id;
+//    }
+
+
+    public String getId() {
         return id;
     }
 
-    public void setId(final ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
