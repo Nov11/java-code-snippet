@@ -8,6 +8,10 @@ import java.net.Socket;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+/**
+ * produce read time out exception
+ * packets can be captured using 'any' in wireshark
+ */
 public class Client {
     private static final Logger logger = getLogger(Client.class);
 
