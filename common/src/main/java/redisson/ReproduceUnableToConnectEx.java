@@ -5,11 +5,24 @@ import org.redisson.api.RKeys;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.redisson.config.ReadMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ReproduceUnableToConnectEx {
+    private static final Logger logger = LoggerFactory.getLogger(ReproduceUnableToConnectEx.class);
+
     public static void main(String[] args) throws InterruptedException {
-        sentinelConnection();
-        Thread.sleep(10000);
+//        readTimeOutEx();
+//        for (int i = 0; i < 10; i++) {
+//            sentinelConnection();
+//            logger.info("finished : {}", i);
+//        }
+//        Thread.sleep(10000);
+
+        readTimeOutEx();
     }
 
     private static void sentinelConnection() {
@@ -32,11 +45,21 @@ public class ReproduceUnableToConnectEx {
 
     private static void readTimeOutEx() {
         Config config = new Config();
-        config.useSingleServer().setAddress("127.0.0.1:6379").setConnectTimeout(100).setTimeout(200).setConnectionPoolSize(1).setConnectionMinimumIdleSize(1);
+        config.useSingleServer().setAddress("redis://127.0.0.1:7000").setConnectTimeout(100).setTimeout(200).setConnectionPoolSize(1).setConnectionMinimumIdleSize(1);
         RedissonClient redissonClient = Redisson.create(config);
-        RKeys rKeys = redissonClient.getKeys();
-        for (String s : rKeys.getKeys()) {
-            System.out.println(s);
-        }
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        executorService.submit(() -> {
+            RKeys rKeys = redissonClient.getKeys();
+            for (String s : rKeys.getKeys()) {
+                System.out.println(s);
+            }
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+
     }
 }
