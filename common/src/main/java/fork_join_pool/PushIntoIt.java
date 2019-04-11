@@ -31,6 +31,7 @@ public class PushIntoIt {
             CompletableFuture.runAsync(runnable, forkJoinPool);
         }
 
+        logger.info("10 runasync called");
         forkJoinPool.awaitQuiescence(2000, TimeUnit.SECONDS);
     }
 }
