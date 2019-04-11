@@ -11,6 +11,12 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * specify a small tcp-backlog like 1, use debug sleep to stopi, then connect the redis instance with redisson
+ * the second tcp connection will be not placed into established connection queue
+ * and no syn send back which result in client time out
+ * redisson will throw server not reachable exception
+ */
 public class ReproduceUnableToConnectEx {
     private static final Logger logger = LoggerFactory.getLogger(ReproduceUnableToConnectEx.class);
 
