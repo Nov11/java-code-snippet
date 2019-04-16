@@ -23,6 +23,9 @@ public class EchoServer {
             ByteBuf byteBuf = (ByteBuf) msg;
             String string = byteBuf.toString(StandardCharsets.UTF_8);
             logger.info("receive from client: {}", string);
+            logger.info("Delay: 1000ms");
+            Thread.sleep(1000);
+            logger.info("already Delayed: 1000ms");
             ctx.write(byteBuf);
         }
 

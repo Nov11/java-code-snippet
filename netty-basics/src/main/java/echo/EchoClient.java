@@ -7,7 +7,6 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.util.CharsetUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,8 @@ public class EchoClient {
     private static class ClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
-            ctx.writeAndFlush(Unpooled.copiedBuffer("client message", CharsetUtil.UTF_8));
+//            ctx.writeAndFlush(Unpooled.copiedBuffer("client message", CharsetUtil.UTF_8));
+//            logger.info("channel active msg sent");
         }
 
         @Override
@@ -44,12 +44,16 @@ public class EchoClient {
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast("readtimeout", new ReadTimeoutHandler());
+                            ch.pipeline().addLast("readtimeout", new MongoDriverReadTimeOutHandler(10));
                             ch.pipeline().addLast(new ClientHandler());
                         }
                     })
                     .remoteAddress(new InetSocketAddress("localhost", 18888));
             ChannelFuture future = bootstrap.connect().sync();
+
+            String msg = "msg";
+            future.channel().writeAndFlush(Unpooled.wrappedBuffer(msg.getBytes()));
+
             future.channel().closeFuture().sync();
         }finally {
             eventLoopGroup.shutdownGracefully();
