@@ -30,7 +30,7 @@ public class MakeConnections {
     }
 
 
-    private static MongoClientSettings mongoClientSettings() {
+    public static MongoClientSettings mongoClientSettings() {
         return MongoClientSettings.builder()
                 .applyToConnectionPoolSettings(builder -> builder
                         .maxSize(2)
