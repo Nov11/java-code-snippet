@@ -1,10 +1,9 @@
 package pkg.connection_pooling;
 
-import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
 import org.bson.Document;
 
-import java.util.concurrent.TimeUnit;
+import static pkg.ConnectUtils.mongoClientSettings;
 
 public class MakeConnections {
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(MakeConnections.class);
@@ -30,16 +29,4 @@ public class MakeConnections {
     }
 
 
-    public static MongoClientSettings mongoClientSettings() {
-        return MongoClientSettings.builder()
-                .applyToConnectionPoolSettings(builder -> builder
-                        .maxSize(2)
-                        .minSize(0)
-                        .maxConnectionIdleTime(10, TimeUnit.SECONDS)
-                        .maxWaitTime(0, TimeUnit.SECONDS)
-                        .maxWaitQueueSize(100)
-                )
-                .applyToSocketSettings(builder -> builder.readTimeout(10, TimeUnit.MILLISECONDS))
-                .build();
-    }
 }
