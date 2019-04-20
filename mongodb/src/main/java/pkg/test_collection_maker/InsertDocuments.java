@@ -11,7 +11,14 @@ import static pkg.ConnectUtils.syncCollection;
 
 public class InsertDocuments {
     public static void main(String[] args) {
-        MongoCollection<Document> ret = syncCollection("test", "ttlc");
+//        insert("test", "lsmindex");
+        insert("test", "testc");
+//        insert("test", "ttlc");
+
+    }
+
+    private static void insert(String db, String collection) {
+        MongoCollection<Document> ret = syncCollection(db, collection);
         for (int i = 1; i < 100; i++) {
             ret.insertOne(makeDoc(String.valueOf(i), "doc" + i, 10));
         }
