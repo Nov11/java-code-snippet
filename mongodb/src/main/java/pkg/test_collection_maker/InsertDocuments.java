@@ -38,7 +38,7 @@ public class InsertDocuments {
         return document;
     }
 
-    private static Date secondsInFuture(int seconds) {
+    public static Date secondsInFuture(int seconds) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, seconds);
         return calendar.getTime();

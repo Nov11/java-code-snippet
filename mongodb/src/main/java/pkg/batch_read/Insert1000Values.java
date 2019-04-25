@@ -4,6 +4,8 @@ import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 import pkg.ConnectUtils;
 
+import java.util.Date;
+
 public class Insert1000Values {
 
     public static void main(String[] args) {
@@ -15,6 +17,7 @@ public class Insert1000Values {
             Document document = new Document();
             document.put("_id", String.valueOf(i));
             document.put("name", i + "'s name");
+            document.put("date", new Date());
 
             collection.insertOne(document);
         }
