@@ -1,6 +1,5 @@
 package jpkg;
 
-import com.sun.xml.internal.ws.spi.db.FieldSetter;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TMultiplexedProtocol;
