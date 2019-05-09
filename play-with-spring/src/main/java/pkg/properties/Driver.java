@@ -5,9 +5,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class Driver {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext configApplicationContext = new AnnotationConfigApplicationContext(Config.class);
-        PropertyConfigHolder propertyConfigHolder = configApplicationContext.getBean(PropertyConfigHolder.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 
-        System.out.println(propertyConfigHolder.toString());
+        Hoder hoder = context.getBean(Hoder.class);
+
+        System.out.println(hoder.toString());
     }
 }
