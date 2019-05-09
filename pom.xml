@@ -27,6 +27,7 @@
         <module>common</module>
         <module>embedded-jetty</module>
         <module>mongodb</module>
+        <module>play-with-spring</module>
     </modules>
 
     <build>
