@@ -10,5 +10,8 @@ public class Driver {
         Hoder hoder = context.getBean(Hoder.class);
 
         System.out.println(hoder.toString());
+
+        ReadingMaps readingMaps = context.getBean(ReadingMaps.class);
+        System.out.println(readingMaps.map);
     }
 }
