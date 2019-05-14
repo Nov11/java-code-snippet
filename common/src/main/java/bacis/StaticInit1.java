@@ -6,5 +6,5 @@ public class StaticInit1 {
         System.out.println(StaticInit1.class.getSimpleName());
     }
 
-
+    static StaticInit1 init1 = new StaticInit1();
 }
