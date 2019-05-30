@@ -29,6 +29,7 @@
         <module>mongodb</module>
         <module>play-with-spring</module>
         <module>garbage-collectors</module>
+        <module>failsafe</module>
     </modules>
 
     <build>
