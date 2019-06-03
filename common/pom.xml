@@ -71,5 +71,12 @@
             <artifactId>redisson</artifactId>
         </dependency>
 
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.redisson/redisson &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.redisson</groupId>-->
+<!--            <artifactId>redisson</artifactId>-->
+<!--            <version>3.10.7</version>-->
+<!--        </dependency>-->
+
     </dependencies>
 </project>
