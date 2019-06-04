@@ -10,6 +10,15 @@ import org.redisson.config.ReadMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * make this client works even if redis servers are down and cannot be connected
+ * I'm possibly going into a wrong direction.
+ *
+ */
 public class SClient {
     private static final Logger logger = LoggerFactory.getLogger(SClient.class);
     private RedissonClient client;
@@ -24,15 +33,15 @@ public class SClient {
                 .addSentinelAddress("redis://localhost:5000", "redis://localhost:5001", "redis://localhost:5002")
                 .setMasterName("mymaster")
                 .setReadMode(ReadMode.SLAVE)
-                .setSlaveConnectionMinimumIdleSize(1)
+                .setSlaveConnectionMinimumIdleSize(0)
                 .setSlaveConnectionPoolSize(3)
-                .setMasterConnectionMinimumIdleSize(1)
+                .setMasterConnectionMinimumIdleSize(0)
                 .setMasterConnectionPoolSize(3)
                 .setIdleConnectionTimeout(1000)
                 .setConnectTimeout(100)
                 .setTimeout(10)
-                .setRetryAttempts(1)
-                .setRetryInterval(100)
+//                .setRetryAttempts(1)
+                .setRetryInterval(400)
                 .setKeepAlive(true)
                 .setTcpNoDelay(true);
         client = Redisson.create(config);
@@ -60,13 +69,26 @@ public class SClient {
     }
 
     public static void main(String[] args) {
-//        SClient sClient = new SClient();
-//        sClient.flushDB();
-//
-//        String key = "foo";
-//        String value = "bar";
-//        sClient.setValue(key, value);
-//        logger.info("returned value : actual :{} expected :{}", sClient.getValue(key), value);
-        System.out.println(System.currentTimeMillis() / 1000);
+        SClient sClient = new SClient();
+
+        logger.info("!!!!");
+        sClient.flushDB();
+
+        String key = "foo";
+        String value = "bar";
+        sClient.setValue(key, value);
+
+        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+        scheduledExecutorService.scheduleWithFixedDelay(() -> {
+                    try {
+                        logger.info("scheduled");
+                        String s = sClient.getValue(key);
+                        logger.info("returned value : actual :{} expected :{}", s, value);
+                    } catch (Exception e) {
+                        logger.info("ex:", e);
+                    }
+                },
+                0,
+                10, TimeUnit.MILLISECONDS);
     }
 }
