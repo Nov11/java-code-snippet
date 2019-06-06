@@ -30,7 +30,7 @@ public class SClient {
     private void init() {
         Config config = new Config();
         config.useSentinelServers()
-                .addSentinelAddress("redis://localhost:5000", "redis://localhost:5001", "redis://localhost:5002")
+                .addSentinelAddress("redis://localhost:5000")//, "redis://localhost:5001", "redis://localhost:5002")
                 .setMasterName("mymaster")
                 .setReadMode(ReadMode.SLAVE)
                 .setSlaveConnectionMinimumIdleSize(0)
