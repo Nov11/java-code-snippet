@@ -14,4 +14,11 @@ public class RedisClientConfig {
         //connect timeout
         redisClient.setOptions(ClientOptions.builder().socketOptions(SocketOptions.builder().connectTimeout(Duration.ofMillis(100)).build()).build());
     }
+
+    public static RedisClient buildClient() {
+        RedisClient redisClient = RedisClient.create();
+        redisClient.setDefaultTimeout(Duration.ofMillis(10));
+        redisClient.setOptions(ClientOptions.builder().socketOptions(SocketOptions.builder().connectTimeout(Duration.ofMillis(10)).build()).build());
+        return redisClient;
+    }
 }
