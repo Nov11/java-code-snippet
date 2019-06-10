@@ -18,10 +18,13 @@ import java.util.function.Function;
  * 1000     126     44
  * 100      37      9
  * 10       13      2
+ *
+ * performance is down by little bit when tcp no delay is enabled
+ * but lowest time consumption in above situations still hold
  */
 public class Pipeline {
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(Pipeline.class);
-    private static final int ITERATION = 10;
+    private static final int ITERATION = 10000;
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         RedisClient redisClient = RedisClientConfig.buildClient();
