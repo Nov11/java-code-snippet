@@ -30,6 +30,7 @@
         <module>play-with-spring</module>
         <module>garbage-collectors</module>
         <module>failsafe</module>
+        <module>old-zipkin</module>
     </modules>
 
     <build>
