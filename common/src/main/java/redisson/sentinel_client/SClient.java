@@ -1,5 +1,6 @@
 package redisson.sentinel_client;
 
+import com.timgroup.statsd.StatsDClient;
 import org.redisson.Redisson;
 import org.redisson.api.RBinaryStream;
 import org.redisson.api.RBucket;
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class SClient {
     private static final Logger logger = LoggerFactory.getLogger(SClient.class);
+    private static final StatsDClient statsDClient = TimStatsDClient.getClient();
     private RedissonClient client;
 
     public SClient() {
@@ -82,7 +84,10 @@ public class SClient {
         scheduledExecutorService.scheduleWithFixedDelay(() -> {
                     try {
                         logger.info("scheduled");
+                        long start = System.currentTimeMillis();
                         String s = sClient.getValue(key);
+                        long diff = System.currentTimeMillis() - start;
+                        statsDClient.time("getValue", diff);
                         logger.info("returned value : actual :{} expected :{}", s, value);
                     } catch (Exception e) {
                         logger.info("ex:", e);
