@@ -71,6 +71,11 @@
             <artifactId>redisson</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>io.github.nov11</groupId>
+            <artifactId>statsd-client</artifactId>
+        </dependency>
+
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.redisson/redisson &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>org.redisson</groupId>-->

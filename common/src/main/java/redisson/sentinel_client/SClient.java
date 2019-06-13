@@ -1,5 +1,8 @@
 package redisson.sentinel_client;
 
+import com.timgroup.statsd.StatsDClient;
+import io.github.nov11.TimGroupStatsDClient;
+import io.github.nov11.udp.UdpPipelineClient;
 import org.redisson.Redisson;
 import org.redisson.api.RBinaryStream;
 import org.redisson.api.RBucket;
@@ -18,9 +21,13 @@ import java.util.concurrent.TimeUnit;
  * make this client works even if redis servers are down and cannot be connected
  * I'm possibly going into a wrong direction.
  *
+ * by the way.
+ * Trying to reproduce long response time situation when some redis server are down
+ * still trying...
  */
 public class SClient {
     private static final Logger logger = LoggerFactory.getLogger(SClient.class);
+    private static final StatsDClient STATSD_CLIENT = new TimGroupStatsDClient("redisson-client", new UdpPipelineClient("localhost", 8125));
     private RedissonClient client;
 
     public SClient() {
@@ -82,7 +89,9 @@ public class SClient {
         scheduledExecutorService.scheduleWithFixedDelay(() -> {
                     try {
                         logger.info("scheduled");
+                        long start = System.currentTimeMillis();
                         String s = sClient.getValue(key);
+                        STATSD_CLIENT.time("getValue", System.currentTimeMillis() - start);
                         logger.info("returned value : actual :{} expected :{}", s, value);
                     } catch (Exception e) {
                         logger.info("ex:", e);
