@@ -1,9 +1,10 @@
 package ppkkgg;
 
-import net.jodah.failsafe.CircuitBreaker;
-import net.jodah.failsafe.Failsafe;
-import net.jodah.failsafe.SyncFailsafe;
-import net.jodah.failsafe.function.CheckedConsumer;
+
+import port.net.jodah.failsafe.CircuitBreaker;
+import port.net.jodah.failsafe.Failsafe;
+import port.net.jodah.failsafe.SyncFailsafe;
+import port.net.jodah.failsafe.function.CheckedConsumer;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +49,8 @@ public class Test {
                     return "expect value";
                 });
                 logger.info("i : {} result : {} state : {}", i, ret, circuitBreaker.getState());
-            }catch (Exception e){}
+            } catch (Exception e) {
+            }
         }
     }
 

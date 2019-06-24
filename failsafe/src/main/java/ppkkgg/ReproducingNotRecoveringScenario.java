@@ -1,32 +1,32 @@
 package ppkkgg;
 
 import com.timgroup.statsd.StatsDClient;
-import net.jodah.failsafe.CircuitBreaker;
-import org.apache.commons.lang3.reflect.MethodUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import port.net.jodah.failsafe.CircuitBreaker;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class ReproducingNotRecoveringScenario {
+    private static final Logger logger = LoggerFactory.getLogger(ReproducingNotRecoveringScenario.class);
     private static final StatsDClient statsDClient = TimStatsDClient.getClient();
     private static CircuitBreaker circuitBreaker = new CircuitBreaker()
             .withDelay(1, TimeUnit.SECONDS)
             .withFailureThreshold(3, 5)
             .withSuccessThreshold(1, 1);
-    private static final Method before = MethodUtils.getMatchingMethod(CircuitBreaker.class, "before");
-    private static final Method recordFailure = MethodUtils.getMatchingMethod(CircuitBreaker.class, "recordFailure");
-    private static final Method recordSuccess = MethodUtils.getMatchingMethod(CircuitBreaker.class, "recordSuccess");
-    private static boolean returnValue = false;
+    private static boolean suc = false;
 
     private static boolean allow() {
         if (circuitBreaker.allowsExecution()) {
             statsDClient.increment("suc");
+            logger.info("allow");
             return true;
         }
         statsDClient.increment("fail");
+        logger.info("reject");
         return false;
     }
 
@@ -35,21 +35,35 @@ public class ReproducingNotRecoveringScenario {
             return;
         }
 
-        before.invoke(circuitBreaker);
+        circuitBreaker.before();
 
         //blabla
 
-        if (returnValue) {
-            recordFailure.invoke(circuitBreaker, new Exception("failure"));
+        if (suc) {
+            circuitBreaker.recordSuccess();
         } else {
-            recordSuccess.invoke(circuitBreaker);
+            circuitBreaker.recordFailure();
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
         ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+        ScheduledExecutorService scheduledExecutorService1 = Executors.newSingleThreadScheduledExecutor();
 
-        scheduledExecutorService.scheduleAtFixedRate(() -> {
+        scheduledExecutorService.scheduleAtFixedRate(getRunnable(), 0, 500, TimeUnit.MILLISECONDS);
+        scheduledExecutorService1.scheduleAtFixedRate(getRunnable(), 0, 500, TimeUnit.MILLISECONDS);
+
+        Thread.sleep(20 * 1000);
+
+        suc = true;
+        logger.info("switch to suc");
+
+        Thread.sleep(10 * 1000);
+
+    }
+
+    private static Runnable getRunnable() {
+        return () -> {
                     try {
                         work();
                     } catch (InvocationTargetException e) {
@@ -58,12 +72,6 @@ public class ReproducingNotRecoveringScenario {
                         e.printStackTrace();
                     }
 
-                }, 0, 1, TimeUnit.SECONDS
-        );
-
-        Thread.sleep(20 * 1000);
-        returnValue = true;
-
-        Thread.sleep(10 * 1000);
+                };
     }
 }

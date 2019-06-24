@@ -421,14 +421,14 @@ public class CircuitBreaker {
     return this;
   }
 
-  void before() {
+  public void before() {
     currentExecutions.incrementAndGet();
   }
 
   /**
    * Records an execution failure.
    */
-  void recordFailure() {
+  public void recordFailure() {
     try {
       state.get().recordFailure();
     } finally {
@@ -436,7 +436,7 @@ public class CircuitBreaker {
     }
   }
 
-  void recordResult(Object result, Throwable failure) {
+  public void recordResult(Object result, Throwable failure) {
     try {
       if (isFailure(result, failure))
         state.get().recordFailure();
