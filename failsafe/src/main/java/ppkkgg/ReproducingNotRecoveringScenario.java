@@ -6,8 +6,9 @@ import org.slf4j.LoggerFactory;
 import port.net.jodah.failsafe.CircuitBreaker;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 public class ReproducingNotRecoveringScenario {
@@ -17,7 +18,7 @@ public class ReproducingNotRecoveringScenario {
             .withDelay(1, TimeUnit.SECONDS)
             .withFailureThreshold(3, 5)
             .withSuccessThreshold(1, 1);
-    private static boolean suc = false;
+    private static volatile boolean suc = false;
 
     private static boolean allow() {
         if (circuitBreaker.allowsExecution()) {
@@ -47,11 +48,16 @@ public class ReproducingNotRecoveringScenario {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        ScheduledExecutorService scheduledExecutorService1 = Executors.newSingleThreadScheduledExecutor();
+//        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+//        ScheduledExecutorService scheduledExecutorService1 = Executors.newSingleThreadScheduledExecutor();
+//
+//        scheduledExecutorService.scheduleAtFixedRate(getRunnable(), 0, 500, TimeUnit.MILLISECONDS);
+//        scheduledExecutorService1.scheduleAtFixedRate(getRunnable(), 0, 500, TimeUnit.MILLISECONDS);
 
-        scheduledExecutorService.scheduleAtFixedRate(getRunnable(), 0, 500, TimeUnit.MILLISECONDS);
-        scheduledExecutorService1.scheduleAtFixedRate(getRunnable(), 0, 500, TimeUnit.MILLISECONDS);
+        Executor executor = Executors.newFixedThreadPool(10);
+        for (int i = 0; i < 10; i++) {
+            executor.execute(getRunnable());
+        }
 
         Thread.sleep(20 * 1000);
 
@@ -64,14 +70,21 @@ public class ReproducingNotRecoveringScenario {
 
     private static Runnable getRunnable() {
         return () -> {
-                    try {
-                        work();
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
+            while (true) {
+                try {
+                    work();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
 
-                };
+                try {
+                    Thread.sleep(ThreadLocalRandom.current().nextInt(500, 600));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
     }
 }
