@@ -12,6 +12,8 @@ public class ShowException {
 
     @Test
     public void name2() {
-        Assert.fail("name2");
+//        Assert.fail("name2");
+
+        long ret = Long.parseLong("\"162210173\"".trim());
     }
 }
