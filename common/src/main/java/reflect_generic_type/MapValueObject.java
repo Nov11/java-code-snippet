@@ -100,9 +100,13 @@ public class MapValueObject {
     }
 
     public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InstantiationException {
-        test("foo");
-        test("bar");
+//        test("foo");
+//        test("bar");
 
 //        Integer i = new Integer(0);
+
+        Method foo = MapValueObject.class.getMethod("foo");
+        ParameterizedType parameterizedType = (ParameterizedType) foo.getGenericReturnType();
+        System.out.println(parameterizedType.getActualTypeArguments()[0]);
     }
 }
