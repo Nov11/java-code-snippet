@@ -74,6 +74,8 @@ public class ApacheAsyncClient {
 //            String result = apacheAsyncClient.makeRequest().get();
 //            logger.info("ret : {}", result);
 //        }
+        Thread.sleep(60000);
+        logger.info("exiting");
         System.exit(0);
     }
 }
