@@ -1,0 +1,3 @@
+[INFO ] 2019-07-04 18:12:58.552 [main] TestDrive - common message line1
+[INFO ] 2019-07-04 18:12:58.554 [main] TestDrive - common message line2
+[INFO ] 2019-07-04 18:12:58.554 [main] TestDrive - ex: java.lang.RuntimeException: dumb exception|	at pkg.log.TestDrive.main(TestDrive.java:13) [classes/:?]|
