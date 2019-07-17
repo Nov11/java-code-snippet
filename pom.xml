@@ -36,6 +36,7 @@
         <module>common-config</module>
         <module>log4j-config</module>
         <module>flatbuffer-mod</module>
+        <module>protobuf-mod</module>
     </modules>
 
     <build>
