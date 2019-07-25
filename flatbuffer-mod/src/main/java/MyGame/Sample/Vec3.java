@@ -2,10 +2,10 @@
 
 package MyGame.Sample;
 
-import com.google.flatbuffers.FlatBufferBuilder;
-import com.google.flatbuffers.Struct;
-
-import java.nio.ByteBuffer;
+import java.nio.*;
+import java.lang.*;
+import java.util.*;
+import com.google.flatbuffers.*;
 
 @SuppressWarnings("unused")
 public final class Vec3 extends Struct {
