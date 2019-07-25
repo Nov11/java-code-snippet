@@ -2,6 +2,7 @@ package pkg;
 
 import io.lettuce.core.ClientOptions;
 import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisURI;
 import io.lettuce.core.SocketOptions;
 
 import java.time.Duration;
@@ -21,4 +22,6 @@ public class RedisClientConfig {
         redisClient.setOptions(ClientOptions.builder().socketOptions(SocketOptions.builder().connectTimeout(Duration.ofMillis(10)).tcpNoDelay(true).build()).build());
         return redisClient;
     }
+
+    public static final RedisURI redisUri = new RedisURI("localhost", 6379, Duration.ofMillis(10));
 }
