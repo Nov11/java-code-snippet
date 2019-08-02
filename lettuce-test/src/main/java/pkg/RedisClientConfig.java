@@ -18,10 +18,10 @@ public class RedisClientConfig {
 
     public static RedisClient buildClient() {
         RedisClient redisClient = RedisClient.create();
-        redisClient.setDefaultTimeout(Duration.ofMillis(10));
+        redisClient.setDefaultTimeout(Duration.ofMillis(100));
         redisClient.setOptions(ClientOptions.builder().socketOptions(SocketOptions.builder().connectTimeout(Duration.ofMillis(10)).tcpNoDelay(true).build()).build());
         return redisClient;
     }
 
-    public static final RedisURI redisUri = new RedisURI("localhost", 6379, Duration.ofMillis(10));
+    public static final RedisURI redisUri = new RedisURI("localhost", 6379, Duration.ofMillis(100));
 }
