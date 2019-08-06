@@ -22,6 +22,10 @@ public class Spring4Test {
     @Configuration
     @EnableAspectJAutoProxy
     public static class Config {
+        public Config() {
+            logger.info("config ctor");
+        }
+
         @Bean
         A a() {
             return new A();
@@ -75,6 +79,16 @@ public class Spring4Test {
 
     @Test
     public void t() {
+        logger.info("t");
         a.foo(1234);
+    }
+
+    @Test
+    public void t2() {
+        logger.info("t2");
+    }
+
+    public Spring4Test() {
+        logger.info("spring4test ctor");
     }
 }
