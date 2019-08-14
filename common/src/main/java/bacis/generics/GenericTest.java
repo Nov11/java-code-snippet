@@ -67,15 +67,15 @@ public class GenericTest {
 //        t(new AA());
 //        t(new AAA());
 
-        ft(GenericTest::f1);
-        ft(GenericTest::f2);
-        ft(GenericTest::f3);
-        ft(GenericTest::f11);
-        ft(GenericTest::f12);
-        ft(GenericTest::f13);
-        ft(GenericTest::f21);
-        ft(GenericTest::f22);
-        ft(GenericTest::f23);
+//        ft(GenericTest::f1);
+//        ft(GenericTest::f2);
+//        ft(GenericTest::f3);
+//        ft(GenericTest::f11);
+//        ft(GenericTest::f12);
+//        ft(GenericTest::f13);
+//        ft(GenericTest::f21);
+//        ft(GenericTest::f22);
+//        ft(GenericTest::f23);
     }
 
     static class A {
@@ -95,6 +95,4 @@ public class GenericTest {
 
     static class BBB {
     }
-
-    Function
 }
