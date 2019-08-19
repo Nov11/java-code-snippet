@@ -76,6 +76,11 @@
             <artifactId>statsd-client</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.redisson/redisson &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>org.redisson</groupId>-->
