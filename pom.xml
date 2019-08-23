@@ -38,6 +38,7 @@
         <module>flatbuffer-mod</module>
         <module>protobuf-mod</module>
         <module>junit</module>
+        <module>jackson-test</module>
     </modules>
 
     <build>
