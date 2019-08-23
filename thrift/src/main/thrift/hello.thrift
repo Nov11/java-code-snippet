@@ -8,3 +8,8 @@ struct OneStruct {
 service HelloSvc {
    string hello_func()
 }
+
+struct Item {
+    1:optional i32 id;
+    2:optional string name;
+}

@@ -39,6 +39,7 @@
         <module>protobuf-mod</module>
         <module>junit</module>
         <module>jackson-test</module>
+        <module>container-seralization-thrift</module>
     </modules>
 
     <build>
