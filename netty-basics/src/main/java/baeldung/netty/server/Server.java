@@ -10,14 +10,18 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.concurrent.DefaultEventExecutorGroup;
+import io.netty.util.concurrent.EventExecutorGroup;
 
 public class Server {
 
-    public void start(){
+    public void start() {
+        EventExecutorGroup eventExecutors = new DefaultEventExecutorGroup(2);
+        EventExecutorGroup eventExecutors2 = new DefaultEventExecutorGroup(2);
         EventLoopGroup boss = new NioEventLoopGroup();
         EventLoopGroup worker = new NioEventLoopGroup();
 
-        try{
+        try {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(boss, worker)
                     .channel(NioServerSocketChannel.class)
@@ -26,9 +30,9 @@ public class Server {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline()
-                                    .addLast(new RequestDecoder())
+                                    .addLast(eventExecutors, new RequestDecoder())
                                     .addLast(new ResponseEncoder())
-                                    .addLast(new Handler());
+                                    .addLast(eventExecutors2, new Handler());
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)

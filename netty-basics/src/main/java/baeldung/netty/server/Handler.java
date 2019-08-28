@@ -11,8 +11,10 @@ import org.slf4j.LoggerFactory;
 
 public class Handler extends ChannelInboundHandlerAdapter {
     private static final Logger logger = LoggerFactory.getLogger(Handler.class);
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        logger.info("channel read");
         Request request = (Request) msg;
         Response response = new Response();
         response.setReturnValue(request.getIntValue() * 2);
