@@ -1,7 +1,7 @@
 package http.bareclients;
 
 import io.netty.handler.codec.http.DefaultFullHttpRequest;
-import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpMethod;
 import io.netty.handler.codec.http.HttpVersion;
 import org.slf4j.Logger;
@@ -18,7 +18,9 @@ public class Runner {
 
         NaiveConnection connection = client.makeConnection();
 
-        FullHttpRequest req = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/ss");
+        DefaultFullHttpRequest req = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/ss");
+        HttpHeaders headers = req.headers();
+        headers.add("host", "localhost:8090");
 
         connection.connect("localhost", 8090).sync();
 

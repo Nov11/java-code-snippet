@@ -44,7 +44,6 @@ public class NaiveConnection {
         this.socketTimeoutMills = socketTimeout;
     }
 
-
     public ChannelFuture connect(String host, int port) {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.channel(NioSocketChannel.class)
@@ -58,8 +57,9 @@ public class NaiveConnection {
                         pipeline.addLast(eventExecutors, new NaiveHandler(result));
                     }
                 })
-                .option(ChannelOption.AUTO_READ, false)
-                .option(ChannelOption.SO_KEEPALIVE, true)
+                //if set, not message can be read in my handler
+//                .option(ChannelOption.AUTO_READ, false)
+                .option(ChannelOption.SO_KEEPALIVE, false)
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, connectionTimeoutMills)
                 //Unknown channel option 'SO_TIMEOUT' for channel '[id: 0xf711ca52]'
 //                .option(ChannelOption.SO_TIMEOUT, socketTimeoutMills)

@@ -18,7 +18,9 @@ public class Client {
     }
 
     private static FullHttpRequest fullHttpRequest() {
-        return new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.POST, "/test");
+        DefaultFullHttpRequest request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/ss");
+        request.headers().add("host", "localhost:8090");
+        return request;
     }
 
     public void start() throws InterruptedException {
@@ -46,7 +48,7 @@ public class Client {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Client client = new Client("localhost", 8080);
+        Client client = new Client("localhost", 8090);
         client.start();
     }
 }
