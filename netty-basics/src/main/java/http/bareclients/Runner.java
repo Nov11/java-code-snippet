@@ -20,7 +20,7 @@ public class Runner {
 
         FullHttpRequest req = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/ss");
 
-        connection.connect("localhost", 8080).sync();
+        connection.connect("localhost", 8090).sync();
 
         CompletableFuture<byte[]> content = connection.request(req);
 

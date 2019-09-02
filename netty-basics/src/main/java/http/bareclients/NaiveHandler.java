@@ -20,6 +20,7 @@ public class NaiveHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        logger.info("naive handler called");
         if (!(msg instanceof FullHttpResponse)) {
             throw new IllegalArgumentException("msg is not of type full http response");
         }
