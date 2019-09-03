@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBufUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +34,8 @@ public class NaiveHandler extends ChannelInboundHandlerAdapter {
         responseContent.complete(bytes);
 
         logger.info("read: {}", bytes);
+
+        ReferenceCountUtil.release(msg);
         ctx.close();
     }
 }
