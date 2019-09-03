@@ -27,6 +27,6 @@ public class Runner {
 
         CompletableFuture<byte[]> content = connection.request(req);
 
-        logger.info("{}", content.get());
+        logger.info("[final result]http result payload : {}", content.get());
     }
 }
