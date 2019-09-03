@@ -20,6 +20,7 @@ public class Runner {
 
         DefaultFullHttpRequest req = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/ss");
         HttpHeaders headers = req.headers();
+        //jetty rejects requests without host header
         headers.add("host", "localhost:8090");
 
         connection.connect("localhost", 8090).sync();
