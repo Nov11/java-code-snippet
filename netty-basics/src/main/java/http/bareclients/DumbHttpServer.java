@@ -1,10 +1,7 @@
 package http.bareclients;
 
-import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,14 +23,9 @@ public class DumbHttpServer {
     }
 
     public static void main(String[] args) throws Exception {
-        Server server = new Server();
-        ServerConnector connector = new ServerConnector(server);
-        connector.setPort(8090);
-        server.setConnectors(new Connector[]{connector});
+        Server server = new Server(8090);
         ServletContextHandler servletContextHandler = new ServletContextHandler(null, "/");
-
-        ServletHolder servletHolder = new ServletHolder(new Handler());
-        servletContextHandler.addServlet(servletHolder, "/ss");
+        servletContextHandler.addServlet(Handler.class, "/ss");
 
         server.setHandler(servletContextHandler);
         server.start();
