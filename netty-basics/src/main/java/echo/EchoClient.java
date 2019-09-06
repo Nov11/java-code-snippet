@@ -25,6 +25,11 @@ public class EchoClient {
         }
 
         @Override
+        public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+            logger.info("inactive");
+        }
+
+        @Override
         protected void channelRead0(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf) throws Exception {
             logger.info("received from server: {}", byteBuf.toString(CharsetUtil.UTF_8));
         }
@@ -38,7 +43,7 @@ public class EchoClient {
 
     public void start() throws InterruptedException {
         Bootstrap bootstrap = new Bootstrap();
-        try{
+        try {
             bootstrap.group(eventLoopGroup)
                     .channel(NioSocketChannel.class)
                     .handler(new ChannelInitializer<SocketChannel>() {
@@ -48,14 +53,16 @@ public class EchoClient {
                             ch.pipeline().addLast(new ClientHandler());
                         }
                     })
-                    .remoteAddress(new InetSocketAddress("localhost", 18888));
+                    .remoteAddress(new InetSocketAddress("localhost", 8090));
             ChannelFuture future = bootstrap.connect().sync();
 
             String msg = "msg";
             future.channel().writeAndFlush(Unpooled.wrappedBuffer(msg.getBytes()));
 
             future.channel().closeFuture().sync();
-        }finally {
+            logger.info("close future returned");
+            Thread.sleep(1000);
+        } finally {
             eventLoopGroup.shutdownGracefully();
         }
     }
