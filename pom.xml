@@ -40,6 +40,7 @@
         <module>junit</module>
         <module>jackson-test</module>
         <module>container-seralization-thrift</module>
+        <module>resource-only</module>
     </modules>
 
     <build>
@@ -276,6 +277,12 @@
                 <groupId>org.openjdk.jmh</groupId>
                 <artifactId>jmh-generator-annprocess</artifactId>
                 <version>1.19</version>
+            </dependency>
+
+            <dependency>
+                <groupId>nov11</groupId>
+                <artifactId>resource-only</artifactId>
+                <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
         <!--<dependency>-->
