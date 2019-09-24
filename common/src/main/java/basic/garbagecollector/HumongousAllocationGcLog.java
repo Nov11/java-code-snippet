@@ -1,4 +1,4 @@
-package bacis.garbagecollector;
+package basic.garbagecollector;
 
 import java.util.ArrayList;
 import java.util.List;

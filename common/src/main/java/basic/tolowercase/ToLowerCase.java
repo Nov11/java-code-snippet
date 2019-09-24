@@ -1,4 +1,4 @@
-package bacis.tolowercase;
+package basic.tolowercase;
 
 public class ToLowerCase {
     public static void main(String[] args) {

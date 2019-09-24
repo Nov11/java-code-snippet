@@ -1,4 +1,4 @@
-package bacis;
+package basic;
 
 public class Impl implements Inter {
     public static void main(String[] args) {

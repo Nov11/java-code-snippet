@@ -1,4 +1,4 @@
-package bacis;
+package basic;
 
 import java.util.HashMap;
 import java.util.Map;

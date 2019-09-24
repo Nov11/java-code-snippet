@@ -1,4 +1,4 @@
-package bacis;
+package basic;
 
 /**
  * ordering static fields init from different classes

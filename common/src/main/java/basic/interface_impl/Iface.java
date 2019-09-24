@@ -1,4 +1,4 @@
-package bacis.interface_impl;
+package basic.interface_impl;
 
 public interface Iface {
     void work();

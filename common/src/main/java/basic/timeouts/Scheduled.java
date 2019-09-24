@@ -1,4 +1,4 @@
-package bacis.timeouts;
+package basic.timeouts;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

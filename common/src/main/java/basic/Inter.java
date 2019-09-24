@@ -1,4 +1,4 @@
-package bacis;
+package basic;
 
 public interface Inter {
     default void ptr() {

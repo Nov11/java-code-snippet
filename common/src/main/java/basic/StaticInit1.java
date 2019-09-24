@@ -1,4 +1,4 @@
-package bacis;
+package basic;
 
 public class StaticInit1 {
     static {

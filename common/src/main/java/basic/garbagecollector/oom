@@ -117,7 +117,7 @@
    [Eden: 0.0B(6144.0K)->0.0B(6144.0K) Survivors: 0.0B->0.0B Heap: 92.8M(128.0M)->92.8M(128.0M)], [Metaspace: 3124K->3124K(1056768K)]
  [Times: user=0.01 sys=0.00, real=0.00 secs]
 Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
-	at bacis.garbagecollector.HumongousAllocationGcLog.main(HumongousAllocationGcLog.java:11)
+	at basic.garbagecollector.HumongousAllocationGcLog.main(HumongousAllocationGcLog.java:11)
 Heap
  garbage-first heap   total 131072K, used 95023K [0x00000007b8000000, 0x00000007b8100400, 0x00000007c0000000)
   region size 1024K, 1 young (1024K), 0 survivors (0K)

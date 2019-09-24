@@ -1,4 +1,4 @@
-package bacis.generics;
+package basic.generics;
 
 import java.util.function.Function;
 

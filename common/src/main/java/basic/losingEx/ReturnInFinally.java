@@ -1,4 +1,4 @@
-package bacis.losingEx;
+package basic.losingEx;
 
 //exception is not passed to caller but swallowed
 public class ReturnInFinally {
