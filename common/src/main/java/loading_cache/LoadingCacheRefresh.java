@@ -4,9 +4,11 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListenableFutureTask;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -27,17 +29,25 @@ public class LoadingCacheRefresh {
                     @Override
                     public ListenableFuture<String> reload(String key, String oldValue) throws Exception {
                         logger.info("reload called");
-                        return super.reload(key, oldValue);
+                        ListenableFuture<String> ret = ListenableFutureTask.create(new Callable<String>() {
+                            @Override
+                            public String call() throws Exception {
+                                logger.info("calling");
+                                Thread.sleep(500);
+                                return "reload_reuslt";
+                            }
+                        });
+                        return ret;
                     }
                 });
 
         String value = loadingCache.get("A");
-        logger.info("value :{}", value);
+        logger.info("main value :{}", value);
 
         Thread.sleep(1000);
 
-        value = loadingCache.get("B");
+        value = loadingCache.get("A");
 
-        logger.info("value :{}", value);
+        logger.info("main value :{}", value);
     }
 }
