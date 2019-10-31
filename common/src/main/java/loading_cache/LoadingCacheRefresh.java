@@ -4,11 +4,11 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListenableFutureTask;
+import com.google.common.util.concurrent.SettableFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -18,7 +18,7 @@ public class LoadingCacheRefresh {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         LoadingCache<String, String> loadingCache = CacheBuilder.newBuilder()
-                .refreshAfterWrite(100, TimeUnit.MILLISECONDS)
+                .refreshAfterWrite(500, TimeUnit.MILLISECONDS)
                 .build(new CacheLoader<String, String>() {
                     @Override
                     public String load(String key) throws Exception {
@@ -29,25 +29,35 @@ public class LoadingCacheRefresh {
                     @Override
                     public ListenableFuture<String> reload(String key, String oldValue) throws Exception {
                         logger.info("reload called");
-                        ListenableFuture<String> ret = ListenableFutureTask.create(new Callable<String>() {
-                            @Override
-                            public String call() throws Exception {
-                                logger.info("calling");
-                                Thread.sleep(500);
-                                return "reload_reuslt";
+                        SettableFuture<String> ret = SettableFuture.create();
+                        CompletableFuture<Void> c = CompletableFuture.supplyAsync(() -> {
+                            logger.info("calling");
+                            try {
+                                Thread.sleep(100);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
+                            ret.set("result_set");
+                            return null;
                         });
                         return ret;
                     }
                 });
 
         String value = loadingCache.get("A");
-        logger.info("main value :{}", value);
+        logger.info("ret value :{}", value);
 
         Thread.sleep(1000);
 
         value = loadingCache.get("A");
 
-        logger.info("main value :{}", value);
+        logger.info("ret value :{}", value);
+
+        Thread.sleep(200);
+
+        value = loadingCache.get("A");
+
+        logger.info("ret value :{}", value);
+
     }
 }
