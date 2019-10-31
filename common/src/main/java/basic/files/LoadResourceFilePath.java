@@ -34,7 +34,7 @@ public class LoadResourceFilePath {
 
         {
             URL url = getClass().getResource("/" + filePath);
-            System.out.println("class get absolute url : " + url);
+            System.out.println("class get absolute url: " + url);
         }
     }
 
@@ -45,8 +45,8 @@ public class LoadResourceFilePath {
         }
 
         {
-            URL url = getClass().getClassLoader().getResource("/" + filePath);
-            System.out.println("class loader get absolute url : " + url);
+            URL url = getClass().getClassLoader().getResource("basic/files/blabla.json");
+            System.out.println("class loader get absolute url: " + url);
         }
     }
 
