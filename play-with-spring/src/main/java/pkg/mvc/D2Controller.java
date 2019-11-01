@@ -11,4 +11,15 @@ public class D2Controller {
     public String name2() {
         return "name2";
     }
+
+    @ResponseBody
+    @RequestMapping("/interrupt")
+    public String inter() {
+        try {
+            throw new InterruptedException("ll");
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        return "name2";
+    }
 }
