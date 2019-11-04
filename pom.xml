@@ -79,11 +79,6 @@
                 <artifactId>protobuf-java</artifactId>
                 <version>3.5.1</version>
             </dependency>
-            <dependency>
-                <groupId>com.esotericsoftware</groupId>
-                <artifactId>kryo</artifactId>
-                <version>4.0.1</version>
-            </dependency>
             <!-- 1. exclude commons-logging -->
             <dependency>
                 <groupId>org.springframework</groupId>

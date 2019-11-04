@@ -1,0 +1,31 @@
+syntax = "proto2";
+
+package tutorial;
+
+option java_package = "com.example.tutorial";
+option java_outer_classname = "Outer";
+
+enum Color {
+    WHITE = 1;
+}
+
+message Request {
+    required int32 id = 1;
+}
+
+message Request2 {
+    optional int32 id = 1;
+    optional Color color = 2;
+}
+
+message Request3 {
+    repeated int32 id = 1;
+}
+
+message Response {
+    required bool ok = 1;
+    optional string message = 2;
+}
+service CallService {
+    rpc call (Request) returns (Response);
+}
