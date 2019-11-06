@@ -41,6 +41,7 @@
         <module>jackson-test</module>
         <module>container-seralization-thrift</module>
         <module>resource-only</module>
+        <module>jmh-mod</module>
     </modules>
 
     <build>
