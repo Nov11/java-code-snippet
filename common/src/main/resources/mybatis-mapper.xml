@@ -7,4 +7,11 @@
     <select id="selectFirst10" resultType="Employee">
         select * from employees limit 10;
     </select>
+
+
+    <select id="selectById" resultType="Employee">
+        select *
+        from employees
+        where emp_no = #{id};
+    </select>
 </mapper>
