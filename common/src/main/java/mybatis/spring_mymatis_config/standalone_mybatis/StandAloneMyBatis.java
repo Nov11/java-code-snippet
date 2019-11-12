@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class StandAloneMyBatis {
@@ -25,9 +24,29 @@ public class StandAloneMyBatis {
         sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
     }
 
+    public static void main(String[] args) throws IOException {
+        StandAloneMyBatis s = new StandAloneMyBatis();
+//        List<Employee> employeeList = s.get10ByCursor2();
+//        {
+//            Employee employee = s.getById(10001);
+//            logger.info("{}", employee);
+//        }
+        {
+            Employee employee = s.getByIdIfc(10001);
+            logger.info("{}", employee);
+        }
+//        employeeList.forEach(e -> logger.info("{}", e));
+    }
+
     public List<Employee> get10() {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             return sqlSession.selectList("EmployeeMapper.selectFirst10");
+        }
+    }
+
+    public Employee getById(int id) {
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            return sqlSession.selectOne("mybatis.spring_mymatis_config.standalone_mybatis.MapperInterface.selectById", id);
         }
     }
 
@@ -35,9 +54,8 @@ public class StandAloneMyBatis {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             Cursor<Employee> cursor = sqlSession.selectCursor("mybatis.spring_mymatis_config.standalone_mybatis.MapperInterface.selectFirst10");
             List<Employee> result = new ArrayList<>();
-            Iterator<Employee> iterator = cursor.iterator();
-            while (iterator.hasNext()) {
-                result.add(iterator.next());
+            for (Employee employee : cursor) {
+                result.add(employee);
             }
             return result;
         }
@@ -48,17 +66,17 @@ public class StandAloneMyBatis {
             MapperInterface mapperInterface = sqlSession.getMapper(MapperInterface.class);
             Cursor<Employee> cursor = mapperInterface.selectFirst10();
             List<Employee> result = new ArrayList<>();
-            Iterator<Employee> iterator = cursor.iterator();
-            while (iterator.hasNext()) {
-                result.add(iterator.next());
+            for (Employee employee : cursor) {
+                result.add(employee);
             }
             return result;
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        StandAloneMyBatis s = new StandAloneMyBatis();
-        List<Employee> employeeList = s.get10ByCursor();
-        employeeList.forEach(e -> logger.info("{}", e));
+    public Employee getByIdIfc(int id) {
+        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+            MapperInterface mapperInterface = sqlSession.getMapper(MapperInterface.class);
+            return mapperInterface.selectById(id);
+        }
     }
 }

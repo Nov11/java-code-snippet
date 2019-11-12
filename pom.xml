@@ -42,6 +42,7 @@
         <module>container-seralization-thrift</module>
         <module>resource-only</module>
         <module>anltr-mod</module>
+        <module>jmh-mod</module>
     </modules>
 
     <build>

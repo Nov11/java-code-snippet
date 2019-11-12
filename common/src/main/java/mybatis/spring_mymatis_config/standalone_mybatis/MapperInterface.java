@@ -6,4 +6,6 @@ import org.apache.ibatis.cursor.Cursor;
 
 public interface MapperInterface {
     Cursor<Employee> selectFirst10();
+
+    Employee selectById(int id);
 }
