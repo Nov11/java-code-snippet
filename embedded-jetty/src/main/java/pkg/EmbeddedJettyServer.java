@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.*;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 public class EmbeddedJettyServer {
@@ -35,6 +35,7 @@ public class EmbeddedJettyServer {
                 String input = new String(bytes, StandardCharsets.UTF_8);
                 System.out.println("input json:" + input);
             } else {
+                //application/x-www-form-urlencoded
                 String parameter = request.getParameter("item_brief");
                 System.out.println("not multipart:\n json:");
                 System.out.println(parameter);
