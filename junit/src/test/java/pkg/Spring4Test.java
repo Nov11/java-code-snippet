@@ -38,40 +38,40 @@ public class Spring4Test {
     }
 
     public static class A {
-        public int foo(int bbbb) {
-            logger.info("input : {}", bbbb);
-            return bbbb;
+        public int foo(int c) {
+            logger.info("input : {}", c);
+            return c;
         }
     }
 
     @Aspect
     public static class DumbAspect {
-        @Pointcut("execution (* pkg.Spring4Test.A.foo(int)) && args(bbbb)")
-        public void pointCut(int bbbb) {
+        @Pointcut("execution (* pkg.Spring4Test.A.foo(int)) && args(bbbb55)")
+        public void pointCut(int bbbb55) {
         }
 
-        @Before("pointCut(bbbb)")
-        public void beforeMethod(int bbbb) {
+        @Before("pointCut(bbbb2)")
+        public void beforeMethod(int bbbb2) {
             logger.info("beforeMethod");
         }
 
-        @After("pointCut(bbbb)")
-        public void afterMethod(int bbbb) {
-            logger.info("afterMethod");
-        }
-
-        @AfterReturning("pointCut(bbbb)")
-        public void afterReturning(int bbbb) {
-            logger.info("afterReturning");
-        }
-
-        @Around("pointCut(bbbb)")
-        public Object around(ProceedingJoinPoint proceedingJoinPoint, int bbbb) throws Throwable {
-            logger.info("around1");
-            Object ret = proceedingJoinPoint.proceed();
-            logger.info("around2");
-            return ret;
-        }
+//        @After("pointCut(bbbb)")
+//        public void afterMethod(int bbbb) {
+//            logger.info("afterMethod");
+//        }
+//
+//        @AfterReturning("pointCut(bbbb)")
+//        public void afterReturning(int bbbb) {
+//            logger.info("afterReturning");
+//        }
+//
+//        @Around("pointCut(bbbb)")
+//        public Object around(ProceedingJoinPoint proceedingJoinPoint, int bbbb) throws Throwable {
+//            logger.info("around1");
+//            Object ret = proceedingJoinPoint.proceed();
+//            logger.info("around2");
+//            return ret;
+//        }
     }
 
     @Autowired
@@ -83,10 +83,10 @@ public class Spring4Test {
         a.foo(1234);
     }
 
-    @Test
-    public void t2() {
-        logger.info("t2");
-    }
+//    @Test
+//    public void t2() {
+//        logger.info("t2");
+//    }
 
     public Spring4Test() {
         logger.info("spring4test ctor");
