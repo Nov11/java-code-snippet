@@ -1,6 +1,7 @@
 package pkg;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -18,6 +19,7 @@ import java.io.IOException;
 
 public class RequestApiTester {
     private static final Logger logger = LoggerFactory.getLogger(RequestApiTester.class);
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void main(String[] args) throws Exception {
         Server server = new Server();
@@ -56,7 +58,19 @@ public class RequestApiTester {
             logger.info("query string {}", request.getQueryString());
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println("{ \"status\": \"ok\"}");
+            ABC abc = new ABC();
+//            response.getWriter().println("{ \"status\": \"ok\"}");
+            byte[] bytes = mapper.writeValueAsBytes(abc);
+            try {
+                Thread.sleep(100000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            response.getOutputStream().write(bytes);
         }
+    }
+
+    static class ABC {
+        public String url = String.format("https://zhihu.com/question/%d/answer/%d", 1, 2) + "?a=11&b=2";
     }
 }
