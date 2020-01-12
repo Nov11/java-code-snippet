@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * async interface does not timeout
+ */
 public class AsyncTimeOut {
     private static final Logger logger = LoggerFactory.getLogger(AsyncTimeOut.class);
 

@@ -43,6 +43,7 @@
         <module>resource-only</module>
         <module>anltr-mod</module>
         <module>jmh-mod</module>
+        <module>dns-cache</module>
     </modules>
 
     <build>
