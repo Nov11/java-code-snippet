@@ -45,6 +45,7 @@
         <module>jmh-mod</module>
         <module>dns-cache</module>
         <module>jmx</module>
+        <module>cache2k-related</module>
     </modules>
 
     <build>
