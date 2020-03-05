@@ -55,23 +55,24 @@ public class Spring4Test {
             logger.info("beforeMethod");
         }
 
-//        @After("pointCut(bbbb)")
-//        public void afterMethod(int bbbb) {
-//            logger.info("afterMethod");
-//        }
-//
-//        @AfterReturning("pointCut(bbbb)")
-//        public void afterReturning(int bbbb) {
-//            logger.info("afterReturning");
-//        }
-//
-//        @Around("pointCut(bbbb)")
-//        public Object around(ProceedingJoinPoint proceedingJoinPoint, int bbbb) throws Throwable {
-//            logger.info("around1");
-//            Object ret = proceedingJoinPoint.proceed();
-//            logger.info("around2");
-//            return ret;
-//        }
+
+        @AfterReturning("pointCut(bbbb)")
+        public void afterReturning(int bbbb) {
+            logger.info("afterReturning");
+        }
+
+        @After("pointCut(bbbb)")
+        public void afterMethod(int bbbb) {
+            logger.info("afterMethod");
+        }
+
+        @Around("pointCut(bbbb)")
+        public Object around(ProceedingJoinPoint proceedingJoinPoint, int bbbb) throws Throwable {
+            logger.info("around1");
+            Object ret = proceedingJoinPoint.proceed();
+            logger.info("around2");
+            return ret;
+        }
     }
 
     @Autowired
