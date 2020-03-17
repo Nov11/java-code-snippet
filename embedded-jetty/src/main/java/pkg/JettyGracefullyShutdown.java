@@ -20,10 +20,10 @@ public class JettyGracefullyShutdown {
             try {
                 //hanging during shutdown
                 Thread.sleep(1000 * 20);
+                resp.getOutputStream().write("Hello".getBytes());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            resp.getOutputStream().write("Hello".getBytes());
         }
     }
 
@@ -41,10 +41,10 @@ public class JettyGracefullyShutdown {
 
         server.setRequestLog(new Slf4jRequestLog());
 
-        StatisticsHandler statisticsHandler = new StatisticsHandler();
-        statisticsHandler.setHandler(servletContextHandler);
-        server.setHandler(statisticsHandler);
-
+//        StatisticsHandler statisticsHandler = new StatisticsHandler();
+//        statisticsHandler.setHandler(servletContextHandler);
+//        server.setHandler(statisticsHandler);
+        server.setHandler(servletContextHandler);
 
         server.start();
     }
