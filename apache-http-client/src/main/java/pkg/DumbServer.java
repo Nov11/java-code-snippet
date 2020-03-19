@@ -21,6 +21,13 @@ public class DumbServer {
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             logger.info("request received");
+            logger.info("delay 20s");
+            try {
+                Thread.sleep(20 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            logger.info("delayed 20s");
             resp.getWriter().println("lalala");
         }
     }
@@ -29,6 +36,7 @@ public class DumbServer {
         Server server = new Server();
         ServerConnector connector = new ServerConnector(server);
         connector.setPort(3456);
+        connector.setAcceptQueueSize(1);
         server.setConnectors(new Connector[]{connector});
         ServletContextHandler servletContextHandler = new ServletContextHandler(null, "/");
 
