@@ -3,6 +3,7 @@ package pkg;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.handler.StatisticsHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
@@ -18,22 +19,21 @@ public class GracefulShutDown {
     private static final Logger logger = LoggerFactory.getLogger(GracefulShutDown.class);
 
     public static void main(String[] args) throws Exception {
-        org.eclipse.jetty.server.Server server = new Server();
+        Server server = new Server();
         ServerConnector connector = new ServerConnector(server);
         connector.setPort(8090);
         server.setConnectors(new Connector[]{connector});
         ServletContextHandler servletContextHandler = new ServletContextHandler(null, "/");
 
-        ServletHolder servletHolder = new ServletHolder();
+        ServletHolder servletHolder = new ServletHolder(new ElapsingHandler());
         servletContextHandler.addServlet(servletHolder, "/ss");
-        //what is this?
-//        StatisticsHandler statisticsHandler = new StatisticsHandler();
-//        statisticsHandler.setHandler(servletContextHandler);
+        StatisticsHandler statisticsHandler = new StatisticsHandler();
+        statisticsHandler.setHandler(servletContextHandler);
 
-        server.setHandler(servletContextHandler);
+        server.setHandler(statisticsHandler);
 
         server.setStopAtShutdown(true);
-        server.setStopTimeout(5 * 1000);
+        server.setStopTimeout(20 * 1000);
 
         server.start();
     }
@@ -45,13 +45,13 @@ public class GracefulShutDown {
                 HttpServletResponse response)
                 throws ServletException, IOException {
 
-
+            logger.info("get request");
             try {
-                Thread.sleep(1000 * 60);
+                Thread.sleep(1000 * 10);
             } catch (InterruptedException e) {
-                logger.error("error", e);
+                logger.error("in handler error", e);
             }
-
+            logger.info("writing response");
             response.setContentType("application/json");
             response.setStatus(HttpServletResponse.SC_OK);
             response.getWriter().println("{ \"status\": \"ok\"}");
