@@ -1,19 +1,15 @@
-package pkg;
+package pkg.spring;
 
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.Slf4jRequestLog;
 import org.eclipse.jetty.server.handler.StatisticsHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class GracefulShutDown {
     private static final Logger logger = LoggerFactory.getLogger(GracefulShutDown.class);
@@ -25,7 +21,11 @@ public class GracefulShutDown {
         server.setConnectors(new Connector[]{connector});
         ServletContextHandler servletContextHandler = new ServletContextHandler(null, "/");
 
-        ServletHolder servletHolder = new ServletHolder(new ElapsingHandler());
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+        context.registerShutdownHook();
+        ElapsingHandler handler = context.getBean(ElapsingHandler.class);
+
+        ServletHolder servletHolder = new ServletHolder(handler);
         servletContextHandler.addServlet(servletHolder, "/ss");
         StatisticsHandler statisticsHandler = new StatisticsHandler();
         statisticsHandler.setHandler(servletContextHandler);
@@ -35,26 +35,14 @@ public class GracefulShutDown {
         server.setStopAtShutdown(true);
         server.setStopTimeout(20 * 1000);
 
+        Slf4jRequestLog requestLog = new Slf4jRequestLog();
+        requestLog.setLogServer(true);
+        requestLog.setExtended(true);
+        requestLog.setLogLatency(true);
+        requestLog.setPreferProxiedForAddress(true);
+        requestLog.setLogTimeZone("GMT+08:00");
+        server.setRequestLog(requestLog);
+
         server.start();
-    }
-
-    public static class ElapsingHandler extends HttpServlet {
-
-        protected void doGet(
-                HttpServletRequest request,
-                HttpServletResponse response)
-                throws ServletException, IOException {
-
-            logger.info("get request");
-            try {
-                Thread.sleep(1000 * 10);
-            } catch (InterruptedException e) {
-                logger.error("in handler error", e);
-            }
-            logger.info("writing response");
-            response.setContentType("application/json");
-            response.setStatus(HttpServletResponse.SC_OK);
-            response.getWriter().println("{ \"status\": \"ok\"}");
-        }
     }
 }
