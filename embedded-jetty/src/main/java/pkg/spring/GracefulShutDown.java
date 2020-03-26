@@ -13,11 +13,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class GracefulShutDown {
     private static final Logger logger = LoggerFactory.getLogger(GracefulShutDown.class);
