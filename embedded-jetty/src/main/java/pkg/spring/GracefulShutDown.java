@@ -39,7 +39,8 @@ public class GracefulShutDown {
 
             @Override
             public void contextDestroyed(ServletContextEvent sce) {
-                context.close();
+                //it's all right if ctx is not closed before jvm shuts down
+//                context.close();
                 logger.info("destory");
             }
         });
