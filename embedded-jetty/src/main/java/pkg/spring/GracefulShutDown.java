@@ -11,6 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 public class GracefulShutDown {
     private static final Logger logger = LoggerFactory.getLogger(GracefulShutDown.class);
 
@@ -27,6 +35,19 @@ public class GracefulShutDown {
 
         ServletHolder servletHolder = new ServletHolder(handler);
         servletContextHandler.addServlet(servletHolder, "/ss");
+        servletContextHandler.addEventListener(new ServletContextListener() {
+
+            @Override
+            public void contextInitialized(ServletContextEvent sce) {
+                logger.info("init");
+            }
+
+            @Override
+            public void contextDestroyed(ServletContextEvent sce) {
+                logger.info("destory");
+            }
+        });
+
         StatisticsHandler statisticsHandler = new StatisticsHandler();
         statisticsHandler.setHandler(servletContextHandler);
 
