@@ -30,6 +30,7 @@ public class GracefulShutDown {
 
         ServletHolder servletHolder = new ServletHolder(handler);
         servletContextHandler.addServlet(servletHolder, "/ss");
+        servletContextHandler.addServlet(NaiveHandler.class, "/test");
         servletContextHandler.addEventListener(new ServletContextListener() {
 
             @Override
