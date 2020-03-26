@@ -53,7 +53,7 @@ public class GracefulShutDown {
         server.setHandler(statisticsHandler);
 
         server.setStopAtShutdown(true);
-        server.setStopTimeout(2 * 1000);
+        server.setStopTimeout(20 * 1000);
 
         Slf4jRequestLog requestLog = new Slf4jRequestLog();
         requestLog.setLogServer(true);
