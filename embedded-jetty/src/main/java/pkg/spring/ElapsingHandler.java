@@ -21,10 +21,11 @@ public class ElapsingHandler extends HttpServlet {
 
         logger.info("get request");
         try {
-            Thread.sleep(1000 * 10);
+            Thread.sleep(1000 * 20);
         } catch (InterruptedException e) {
             logger.error("in handler error", e);
         }
+//        throw new RuntimeException("exception");
         logger.info("writing response");
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);

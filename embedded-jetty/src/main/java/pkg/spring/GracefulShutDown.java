@@ -25,7 +25,7 @@ public class GracefulShutDown {
         ServletContextHandler servletContextHandler = new ServletContextHandler(null, "/");
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
-        context.registerShutdownHook();
+//        context.registerShutdownHook();
         ElapsingHandler handler = context.getBean(ElapsingHandler.class);
 
         ServletHolder servletHolder = new ServletHolder(handler);
@@ -39,17 +39,21 @@ public class GracefulShutDown {
 
             @Override
             public void contextDestroyed(ServletContextEvent sce) {
+                context.close();
                 logger.info("destory");
             }
         });
 
+        //this is necessary to perform a graceful shutdown
+        //so that processing requests are sent back to clients(if finished in time),
+        //or clients receives empty reply
         StatisticsHandler statisticsHandler = new StatisticsHandler();
         statisticsHandler.setHandler(servletContextHandler);
 
         server.setHandler(statisticsHandler);
 
         server.setStopAtShutdown(true);
-        server.setStopTimeout(20 * 1000);
+        server.setStopTimeout(2 * 1000);
 
         Slf4jRequestLog requestLog = new Slf4jRequestLog();
         requestLog.setLogServer(true);
