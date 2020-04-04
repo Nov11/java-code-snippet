@@ -66,5 +66,14 @@ public class GracefulShutDown {
         server.setRequestLog(requestLog);
 
         server.start();
+
+        try {
+            server.join();
+        } catch (Throwable e) {
+            logger.info("joined");
+        } finally {
+            logger.info("exit");
+            System.exit(0);
+        }
     }
 }
