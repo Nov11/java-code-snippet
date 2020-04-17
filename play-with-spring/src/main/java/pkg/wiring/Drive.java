@@ -7,5 +7,8 @@ public class Drive {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
         A a = context.getBean(A.class);
         a.wrapper();
+
+        MultiCtor multiCtor = context.getBean(MultiCtor.class);
+        multiCtor.valid();
     }
 }
