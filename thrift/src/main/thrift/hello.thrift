@@ -17,3 +17,9 @@ struct Item {
 service MultiplicationService {
     i32 multiply(1:i32 n1, 2:i32 n2);
 }
+
+enum COLOR {
+    UNKNOWN = 0;
+    BLACK = 1;
+    WHITE = 2;
+}
