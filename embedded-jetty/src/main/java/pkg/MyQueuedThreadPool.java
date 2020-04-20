@@ -12,7 +12,7 @@ public class MyQueuedThreadPool extends QueuedThreadPool {
 
     private void setLowThreadThreshold(int maxThreads) {
         int threshold = Math.max(1, (int) (maxThreads * 0.2));
-        super.setLowThreadsThreshold(threshold);
+//        super.setLowThreadsThreshold(threshold);
     }
 
     public MyQueuedThreadPool(int maxThreads, int minThreads, int idleTime, BlockingQueue<Runnable> blockingQueue) {
