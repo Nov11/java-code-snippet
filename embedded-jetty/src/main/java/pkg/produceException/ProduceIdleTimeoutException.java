@@ -41,6 +41,7 @@ public class ProduceIdleTimeoutException {
 
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            logger.info("enter do get method");
             try {
                 resp.getWriter().println("1OK");
                 Thread.sleep(1000 * 2);
@@ -48,6 +49,16 @@ public class ProduceIdleTimeoutException {
             } catch (Exception e) {
                 logger.error("ex", e);
             }
+        }
+
+        @Override
+        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            logger.info("enter do post method");
+            int length = req.getContentLength();
+            byte[] b = new byte[length];
+            req.getInputStream().read(b);
+            String s = new String(b);
+            logger.info("body : {}", s);
         }
     }
 }
