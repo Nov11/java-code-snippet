@@ -19,7 +19,6 @@ public class RequestApi {
     private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(RequestApi.class);
 
     public static class BlockingServlet extends HttpServlet {
-
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             logger.info("uri {}", request.getRequestURI());
