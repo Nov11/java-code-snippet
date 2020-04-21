@@ -24,6 +24,7 @@ public class RequestApi {
             logger.info("uri {}", request.getRequestURI());
             logger.info("url {}", request.getRequestURL());
             logger.info("query string {}", request.getQueryString());
+            logger.info("query string size : {}", request.getQueryString().length());
             logger.info("servlet path {}", request.getServletPath());
 
             response.setContentType("application/json");
