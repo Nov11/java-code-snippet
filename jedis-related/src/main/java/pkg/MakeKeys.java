@@ -1,6 +1,7 @@
 package pkg;
 
-import javafx.util.Pair;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;
@@ -14,8 +15,9 @@ import java.util.stream.Collectors;
  * generator key value pairs according to a config
  */
 public class MakeKeys {
-    private static int[] KEY_NUMBER = new int[]{50, 500, 5000};
-    private static int[] VALUE_LENGTH = new int[]{1000, 1000, 1000};
+    private static final Logger logger = LoggerFactory.getLogger(MakeKeys.class);
+    private static int[] KEY_NUMBER = new int[]{500, 500, 5000};
+    private static int[] VALUE_LENGTH = new int[]{800, 1000, 1000};
 
     public static void main(String[] args) {
         generate(0);
@@ -36,12 +38,13 @@ public class MakeKeys {
     }
 
     static List<Pair<String, byte[]>> generateKV(int keyCount, int valueLength) {
+        logger.info("k count : {} v length : {}", keyCount, valueLength);
         byte[] value = new byte[valueLength];
         Random random = new Random();
         List<Pair<String, byte[]>> result = new ArrayList<>();
         for (int i = 0; i < keyCount; i++) {
             random.nextBytes(value);
-            result.add(new Pair<String, byte[]>("K:" + i, value));
+            result.add(new Pair<>("K:" + i, value));
         }
         return result;
     }
