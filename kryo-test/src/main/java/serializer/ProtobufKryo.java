@@ -37,7 +37,12 @@ public class ProtobufKryo<P extends GeneratedMessageV3> extends Serializer<P>{
     }
 
     @Override
-    public P read(Kryo kryo, Input input, Class<P> gmClass) {
+    public P read(Kryo kryo, Input input, Class<? extends P> aClass) {
+//        return null;
+//    }
+//
+//    @Override
+//    public P read(Kryo kryo, Input input, Class<P> gmClass) {
         try {
             return (P)parser.invoke(null, input);
         } catch (InvocationTargetException | IllegalAccessException e) {
