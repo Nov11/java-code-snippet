@@ -2,6 +2,7 @@ package pkg;
 
 import io.lettuce.core.KeyValue;
 import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.StatefulRedisConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ public class AsyncTimeOut {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         RedisClient client = RedisClientConfig.buildClient();
-        StatefulRedisConnection<String, String> connection = client.connect(RedisClientConfig.redisUri);
+        StatefulRedisConnection<String, String> connection = client.connect(RedisURI.create("redis://localhost"));
         logger.info("mget");
         List<KeyValue<String, String>> list = connection.async().mget("foo", "bar").get();
         logger.info("return");

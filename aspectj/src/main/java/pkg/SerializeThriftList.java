@@ -33,7 +33,12 @@ public class SerializeThriftList {
         }
 
         @Override
-        public T read(Kryo kryo, Input input, Class<T> type) {
+        public T read(Kryo kryo, Input input, Class<? extends T> aClass) {
+//            return null;
+//        }
+//
+//        @Override
+//        public T read(Kryo kryo, Input input, Class<T> type) {
             try {
                 byte[] b = new byte[input.available()];
                 input.read(b);
