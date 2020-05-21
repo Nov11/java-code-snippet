@@ -46,6 +46,7 @@
         <module>dns-cache</module>
         <module>jmx</module>
         <module>cache2k-related</module>
+        <module>intro-to-dagger2</module>
     </modules>
 
     <build>
