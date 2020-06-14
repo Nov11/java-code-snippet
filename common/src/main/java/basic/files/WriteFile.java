@@ -10,6 +10,7 @@ public class WriteFile {
     private static final Logger logger = LoggerFactory.getLogger(WriteFile.class);
     public static void main(String[] args) throws IOException {
         File file = new File("fff");
+        logger.info("absolute path {}", file.getAbsolutePath());
         logger.info("exists {}", file.exists());
         logger.info("delete {}", file.delete());
         logger.info("create {}", file.createNewFile());
