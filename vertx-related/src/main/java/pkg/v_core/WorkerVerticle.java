@@ -21,6 +21,7 @@ public class WorkerVerticle {
             logger.info("thread ");
         }, result -> {
             logger.info("result : {}", result);
+            vertx.close();
         });
 
         logger.info("main thread");

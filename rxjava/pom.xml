@@ -18,7 +18,14 @@
             <artifactId>rxjava</artifactId>
             <version>2.2.19</version>
         </dependency>
-
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <!--            <scope>test</scope>-->
+        </dependency>
     </dependencies>
-
 </project>
