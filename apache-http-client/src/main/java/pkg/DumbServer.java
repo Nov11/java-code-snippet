@@ -32,6 +32,21 @@ public class DumbServer {
         }
     }
 
+    static class DelayHandler extends HttpServlet {
+        @Override
+        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            logger.info("request received");
+            logger.info("delay 200ms");
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            logger.info("delayed 200ms");
+            resp.getWriter().println("lalala");
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         Server server = new Server();
         ServerConnector connector = new ServerConnector(server);
@@ -42,6 +57,7 @@ public class DumbServer {
 
         ServletHolder servletHolder = new ServletHolder(new Handler());
         servletContextHandler.addServlet(servletHolder, "/test");
+        servletContextHandler.addServlet(new ServletHolder(new DelayHandler()), "/ss");
 
         server.setHandler(servletContextHandler);
         server.start();
