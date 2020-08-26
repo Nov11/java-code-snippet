@@ -47,6 +47,9 @@
         <module>jmx</module>
         <module>cache2k-related</module>
         <module>intro-to-dagger2</module>
+        <module>spring-boot-related</module>
+        <module>rxjava</module>
+        <module>jdk13</module>
     </modules>
 
     <build>

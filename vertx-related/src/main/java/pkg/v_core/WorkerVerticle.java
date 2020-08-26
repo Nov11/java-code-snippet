@@ -1,4 +1,4 @@
-package v_core;
+package pkg.v_core;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.VertxOptions;
@@ -21,6 +21,7 @@ public class WorkerVerticle {
             logger.info("thread ");
         }, result -> {
             logger.info("result : {}", result);
+            vertx.close();
         });
 
         logger.info("main thread");

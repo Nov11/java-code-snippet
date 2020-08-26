@@ -1,4 +1,4 @@
-package v_core;
+package pkg.v_core;
 
 import io.vertx.core.Future;
 import io.vertx.core.Vertx;
