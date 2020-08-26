@@ -12,7 +12,7 @@ public class Fanout {
     private static final Logger logger = LoggerFactory.getLogger(Fanout.class);
 
     public static void main(String[] args) throws InterruptedException {
-        fanout2();
+        fanout1();
     }
 
     private static void fanout1() throws InterruptedException {

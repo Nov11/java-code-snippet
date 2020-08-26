@@ -28,6 +28,6 @@ public class Config {
     @Bean
     Obj1 obj1() {
         System.err.println("cfg");
-        return new Obj1();
+        return new Obj1(1);
     }
 }

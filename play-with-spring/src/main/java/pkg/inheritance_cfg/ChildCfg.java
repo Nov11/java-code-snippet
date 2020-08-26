@@ -16,6 +16,6 @@ public class ChildCfg {
     @Bean
     Obj1 obj1() {
         System.err.println("childcfg");
-        return new Obj1();
+        return new Obj1(2);
     }
 }

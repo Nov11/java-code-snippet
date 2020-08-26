@@ -10,5 +10,7 @@ public class Drive {
         DHolder dHolder = configApplicationContext.getBean(DHolder.class);
         Instance ins = dHolder.getInstance();
         System.out.println(ins != null);
+        Obj1 ret = (Obj1) configApplicationContext.getBean("obj1");
+        System.out.println(ret.i);
     }
 }
