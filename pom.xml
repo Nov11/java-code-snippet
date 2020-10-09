@@ -50,6 +50,7 @@
         <module>spring-boot-related</module>
         <module>rxjava</module>
         <module>jdk13</module>
+        <module>scala-code</module>
     </modules>
 
     <build>
