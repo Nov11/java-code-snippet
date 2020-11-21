@@ -51,6 +51,7 @@
         <module>rxjava</module>
         <module>jdk13</module>
         <module>scala-code</module>
+        <module>grpc-related</module>
     </modules>
 
     <build>

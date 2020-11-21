@@ -14,5 +14,7 @@ public class JedisTimeouts {
         logger.info("before");
         String ret = jedis.setex("foo", 10, "bar");
         logger.info("after {}", ret);
+
+        jedis.setex("foo".getBytes(), 20, new byte[0]);
     }
 }
