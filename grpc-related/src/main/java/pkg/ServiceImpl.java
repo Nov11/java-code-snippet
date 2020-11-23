@@ -9,7 +9,7 @@ import io.grpc.stub.StreamObserver;
 
 import java.io.IOException;
 
-public class DumbServiceImpl extends DumbServiceGrpc.DumbServiceImplBase {
+public class ServiceImpl extends DumbServiceGrpc.DumbServiceImplBase {
     @Override
     public void exchange(Request request, StreamObserver<Response> responseObserver) {
         responseObserver.onNext(Response.newBuilder().setReply("reply from server").build());
@@ -19,7 +19,8 @@ public class DumbServiceImpl extends DumbServiceGrpc.DumbServiceImplBase {
     public static void main(String[] args) throws IOException, InterruptedException {
         Server server = ServerBuilder
                 .forPort(8080)
-                .addService(new DumbServiceImpl()).build();
+//                .addStreamTracerFactory()
+                .addService(new ServiceImpl()).build();
 
         server.start();
         server.awaitTermination();
