@@ -52,6 +52,7 @@
         <module>jdk13</module>
         <module>scala-code</module>
         <module>grpc-related</module>
+        <module>j-assist</module>
     </modules>
 
     <build>
