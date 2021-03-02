@@ -71,6 +71,6 @@ public class RequestApiTester {
     }
 
     static class ABC {
-        public String url = String.format("https://zhihu.com/question/%d/answer/%d", 1, 2) + "?a=11&b=2";
+        public String url = "";
     }
 }
