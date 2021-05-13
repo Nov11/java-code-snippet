@@ -25,12 +25,16 @@ public class GetRequest {
     }
 
     public static void main(String[] args) throws IOException {
-        String param = param(1024 * 10);
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        HttpHost httpHost = new HttpHost("localhost", 8080);
-        HttpGet httpGet = new HttpGet("/?param=" + param);
+        for (int i = 0; i < 10; i++) {
+
+            String param = param(1024 * 10);
+            HttpClient httpClient = HttpClientBuilder.create().build();
+            HttpHost httpHost = new HttpHost("localhost", 3456);
+            HttpGet httpGet = new HttpGet("/?param=" + param);
 //        HttpGet httpGet = new HttpGet("/ss?param1=12345:xx,67890:yy&param2=67890:zz,222:99&param3=h l");
-        HttpResponse httpResponse = httpClient.execute(httpHost, httpGet);
-        logger.info("resp : {}", httpResponse);
+            HttpResponse httpResponse = httpClient.execute(httpHost, httpGet);
+            logger.info("resp : {}", httpResponse);
+        }
+
     }
 }

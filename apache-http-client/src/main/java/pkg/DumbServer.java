@@ -51,7 +51,7 @@ public class DumbServer {
         Server server = new Server();
         ServerConnector connector = new ServerConnector(server);
         connector.setPort(3456);
-        connector.setAcceptQueueSize(1);
+        connector.setAcceptQueueSize(100);
         server.setConnectors(new Connector[]{connector});
         ServletContextHandler servletContextHandler = new ServletContextHandler(null, "/");
 
