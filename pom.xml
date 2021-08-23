@@ -53,6 +53,7 @@
         <module>scala-code</module>
         <module>grpc-related</module>
         <module>j-assist</module>
+        <module>rocksdb-client</module>
     </modules>
 
     <build>
@@ -306,6 +307,14 @@
                 <artifactId>antlr4</artifactId>
                 <version>4.7.2</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.rocksdb/rocksdbjni -->
+            <dependency>
+                <groupId>org.rocksdb</groupId>
+                <artifactId>rocksdbjni</artifactId>
+                <version>6.22.1</version>
+            </dependency>
+
         </dependencies>
         <!--<dependency>-->
         <!--<groupId>org.mybatis</groupId>-->
