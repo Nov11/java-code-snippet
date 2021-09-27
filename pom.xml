@@ -54,6 +54,7 @@
         <module>grpc-related</module>
         <module>j-assist</module>
         <module>rocksdb-client</module>
+        <module>persistent-cache</module>
     </modules>
 
     <build>
@@ -203,7 +204,7 @@
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
                 <version>3.6.2</version>
-<!--                <version>3.11.1</version>-->
+                <!--                <version>3.11.1</version>-->
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
@@ -275,8 +276,9 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>30.0-jre</version>
+                <version>30.1.1-jre</version>
             </dependency>
+
 
             <dependency>
                 <groupId>com.esotericsoftware</groupId>
@@ -289,7 +291,11 @@
                 <artifactId>jmh-core</artifactId>
                 <version>1.19</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>2.9.2</version> <!-- jdk 1.8 镜像可用-->
+            </dependency>
             <dependency>
                 <groupId>org.openjdk.jmh</groupId>
                 <artifactId>jmh-generator-annprocess</artifactId>
