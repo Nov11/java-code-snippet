@@ -55,6 +55,7 @@
         <module>j-assist</module>
         <module>rocksdb-client</module>
         <module>persistent-cache</module>
+        <module>restful-service-drill</module>
     </modules>
 
     <build>
