@@ -13,6 +13,16 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * using g1gc:
+ * Benchmark                        Mode  Cnt    Score    Error  Units
+ * BHConcat.bh                      avgt    6  376.493 ±  9.555  us/op
+ * BHConcat.bh2                     avgt    6  418.053 ± 56.503  us/op
+ * BHConcat.bh3                     avgt    6  376.081 ±  4.627  us/op
+ * BHConcat.bh4                     avgt    6  350.656 ± 10.872  us/op
+ * BHConcat.bh5                     avgt    6  297.633 ±  6.128  us/op
+ * BHConcat.createCartesianProduct  avgt    6    0.763 ±  0.051  us/op
+ */
 public class BHConcat {
     public static void main(String[] args) throws RunnerException {
         BHConcat bhConcat = new BHConcat();
@@ -26,7 +36,9 @@ public class BHConcat {
                         "-Xms2g",
                         "-XX:+UnlockCommercialFeatures",
                         "-XX:+FlightRecorder",
-                        "-XX:StartFlightRecording=settings=profile,filename=/tmp/test.jfr,dumponexit=true")
+                        "-XX:StartFlightRecording=settings=profile,filename=/tmp/test.jfr,dumponexit=true",
+                        "-XX:+UnlockExperimentalVMOptions",
+                        "-XX:+UseG1GC")
                 .warmupIterations(2)
                 .measurementIterations(2)
                 .warmupTime(TimeValue.seconds(10))
@@ -39,7 +51,8 @@ public class BHConcat {
         new Runner(opt).run();
     }
 
-    //    @Benchmark BHConcat.bh  avgt    6  333.858 ± 21.142  us/op
+    //BHConcat.bh  avgt    6  333.858 ± 21.142  us/op
+    @Benchmark
     public void bh(StateHolder stateHolder, Blackhole blackhole) {
         Set<List<String>> lists = Sets.cartesianProduct(stateHolder.s1, stateHolder.s2, stateHolder.s3);
         for (List<String> list : lists) {
@@ -55,7 +68,7 @@ public class BHConcat {
         }
     }
 
-    //    @Benchmark
+    @Benchmark
     public void bh2(StateHolder stateHolder, Blackhole blackhole) {
         Set<List<String>> lists = Sets.cartesianProduct(stateHolder.s1, stateHolder.s2, stateHolder.s3);
         for (List<String> list : lists) {
@@ -64,7 +77,8 @@ public class BHConcat {
         }
     }
 
-    //    @Benchmark BHConcat.bh3  avgt    6  340.081 ± 20.667  us/op
+    //BHConcat.bh3  avgt    6  340.081 ± 20.667  us/op
+    @Benchmark
     public void bh3(StateHolder stateHolder, Blackhole blackhole) {
         Set<List<String>> lists = Sets.cartesianProduct(stateHolder.s1, stateHolder.s2, stateHolder.s3);
         for (List<String> list : lists) {
@@ -80,7 +94,8 @@ public class BHConcat {
         }
     }
 
-    //    @Benchmark BHConcat.bh4  avgt    6  316.266 ± 12.728  us/op
+    //BHConcat.bh4  avgt    6  316.266 ± 12.728  us/op
+    @Benchmark
     public void bh4(StateHolder stateHolder, Blackhole blackhole) {
         Set<List<String>> lists = Sets.cartesianProduct(stateHolder.s1, stateHolder.s2, stateHolder.s3);
         for (List<String> list : lists) {
@@ -98,7 +113,7 @@ public class BHConcat {
     }
 
     //BHConcat.bh5  avgt    6  259.302 ± 1.523  us/op
-//    @Benchmark
+    @Benchmark
     public void bh5(StateHolder stateHolder, Blackhole blackhole) {
         Set<List<String>> lists = Sets.cartesianProduct(stateHolder.s1, stateHolder.s2, stateHolder.s3);
         char[] buff = new char[30 * 3];
@@ -125,7 +140,7 @@ public class BHConcat {
     }
 
     //0.610 us/op
-//    @Benchmark
+    @Benchmark
     public void createCartesianProduct(StateHolder stateHolder, Blackhole blackhole) {
         Set<List<String>> lists = Sets.cartesianProduct(stateHolder.s1, stateHolder.s2, stateHolder.s3);
         blackhole.consume(lists);
